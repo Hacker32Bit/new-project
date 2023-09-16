@@ -28,26 +28,62 @@ class RegisterPage extends Component {
     })
   }
 
-  submit = () => {
-    const result = { username: this.state.username, email: this.state.email, password: this.state.password }
-
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value })
+  }
+  handleRegister = () => {
+    const { username, email, password } = this.state;
+    console.log(username, email, password, ' --- data');
     this.setState({
-      username: "",
-      email: "",
-      password: ""
+      username: '',
+      email: '',
+      password: ''
     })
-
-    console.log(result)
   }
 
   render() {
+    const { username, email, password } = this.state;
+
     return (
         <div className="container">
             <h1>Register now!</h1>
-            <input type="text" value={this.state.username} onChange={this.onUsername} placeholder="Username"></input>
-            <input type="email" value={this.state.email} onChange={this.onEmail} placeholder="Email"></input>
-            <input type="password" value={this.state.password} onChange={this.onPassword} placeholder="Password"></input>
-            <button onClick={this.submit}>Let's GO!</button>
+            <div className="register-input">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              id="username"
+              value={username}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="register-input">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              id="email"
+              value={email}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="register-input">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              id="password"
+              value={password}
+              onChange={this.handleChange}
+            />
+          </div>
+          <button
+            className="register-btn"
+            onClick={ this.handleRegister }
+          >
+            Register
+          </button>
         </div>
     );
   }
