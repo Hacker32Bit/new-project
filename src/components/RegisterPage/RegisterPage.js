@@ -10,24 +10,6 @@ class RegisterPage extends Component {
     password: "",
   }
 
-  onUsername = (e) => {
-    this.setState({
-      username: e.target.value
-    })
-  } 
-  
-  onEmail = (e) => {
-    this.setState({
-      email: e.target.value
-    })
-  } 
-  
-  onPassword = (e) => {
-    this.setState({
-      password: e.target.value
-    })
-  }
-
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value })
