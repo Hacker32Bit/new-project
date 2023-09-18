@@ -7,7 +7,7 @@ class RegisterPage extends Component {
     username: "",
     email: "",
     password: "",
-    image: "",
+    image: null,
     validationErrors: {},
   };
 
@@ -20,13 +20,16 @@ class RegisterPage extends Component {
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    localStorage.setItem(name, value);
+    this.setState({ [name]: localStorage.getItem(name) });
   };
 
   onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       this.setState({ image: URL.createObjectURL(event.target.files[0]) });
     }
+
+    //localStorage.setItem("image", URL.createObjectURL(event.target.files[0]));
   };
 
   handleRegister = () => {
@@ -36,13 +39,16 @@ class RegisterPage extends Component {
     if (!email.trim() && !this.validateEmail(email)) {
       validationErrors.email = "Please enter a valid email.";
     }
+
     if (!password.trim() && !this.validatePassword(password)) {
       validationErrors.password =
         "Password must contain letters, numbers and bet at least 6 characters long.";
     }
+
     if (username.trim().length < 3) {
       validationErrors.username = "Username is required.";
     }
+
     if (Object.keys(validationErrors).length === 0) {
       this.props.register({ username, email, password, image });
 
@@ -50,7 +56,7 @@ class RegisterPage extends Component {
         username: "",
         email: "",
         password: "",
-        image: "",
+        image: null,
         validationErrors: {},
       });
     } else {
@@ -59,8 +65,8 @@ class RegisterPage extends Component {
   };
 
   render() {
-    const { username, email, password, image, validationErrors } = this.state;
-
+    const { image, validationErrors } = this.state;
+    console.log(localStorage.getItem("image"))
     return (
       <div className="container">
         <h1>Register now!</h1>
@@ -70,7 +76,7 @@ class RegisterPage extends Component {
             name="username"
             placeholder="Username"
             id="username"
-            value={username}
+            value={localStorage.getItem("username")}
             onChange={this.handleChange}
           />
         </div>
@@ -88,7 +94,7 @@ class RegisterPage extends Component {
               <img
                 className="file-upload"
                 alt="userPhoto"
-                src={image ? image : require("../../img/guest.jpg")}
+                src={localStorage.getItem("image") ? image : require("../../img/guest.jpg")}
               ></img>
               <img
                 className="file-upload image-hover"
@@ -105,7 +111,7 @@ class RegisterPage extends Component {
             name="email"
             placeholder="Email"
             id="email"
-            value={email}
+            value={localStorage.getItem("email")}
             onChange={this.handleChange}
           />
         </div>
@@ -115,7 +121,7 @@ class RegisterPage extends Component {
             name="password"
             placeholder="Password"
             id="password"
-            value={password}
+            value={localStorage.getItem("password")}
             onChange={this.handleChange}
           />
         </div>
