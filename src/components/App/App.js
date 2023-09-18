@@ -7,7 +7,7 @@ import "./app.css";
 class App extends Component {
   state = {
     logged: false,
-    data: { username: "", email: "", password: "" },
+    data: { username: "", email: "", password: "", photo: "" },
   };
 
   register = (data) => {
@@ -17,11 +17,17 @@ class App extends Component {
     })
   };
 
+  onLogout = () => {
+    this.setState({
+      logged: false
+    })
+  }
+
   render() {
     return (
       <div className="app">
         {this.state.logged ? (
-          <UserPage userData={this.state.data} />
+          <UserPage userData={this.state.data} onLogout={this.onLogout}/>
         ) : (
           <RegisterPage register={this.register} />
         )}

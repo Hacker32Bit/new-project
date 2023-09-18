@@ -34,3 +34,9 @@
     cursor: pointer;
     transition: width 0.2s;
 }
+
+.profile-photo {
+    width: 200px;
+    border-radius: 100px;
+    outline: 5px solid #273c75;
+}
