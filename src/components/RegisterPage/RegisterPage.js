@@ -13,6 +13,7 @@ class RegisterPage extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
+  
   handleRegister = () => {
     const { username, email, password } = this.state;
     console.log(username, email, password, " --- data");

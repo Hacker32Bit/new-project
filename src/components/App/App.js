@@ -11,29 +11,17 @@ class App extends Component {
   };
 
   register = (data) => {
-    this.setState((prevState) => {
-      let newObj = Object.assign({}, prevState.data);
-
-      newObj.username = data.username;
-      newObj.email = data.email;
-      newObj.password = data.password;
-
-      return { newObj };
-    });
-
     this.setState({
-      logged: true
+      logged: true,
+      data: data,
     })
-
-
-    console.log(this.state.data);
   };
 
   render() {
     return (
       <div className="app">
         {this.state.logged ? (
-          <UserPage data={this.state.data} />
+          <UserPage userData={this.state.data} />
         ) : (
           <RegisterPage register={this.register} />
         )}

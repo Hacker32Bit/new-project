@@ -5,7 +5,7 @@ import "./user-page.css";
 class UserPage extends Component {
   render() {
 
-    const { username, email } = this.props
+    const { username, email } = this.props.userData
 
     return (
       <div className="container">
