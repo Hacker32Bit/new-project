@@ -8,6 +8,14 @@ class RegisterPage extends Component {
     email: "",
     password: "",
     image: "",
+    validationErrors: {},
+  };
+
+  validateEmail = (email) => {
+    return false;
+  };
+  validatePassword = (password) => {
+    return false;
   };
 
   handleChange = (event) => {
@@ -17,25 +25,41 @@ class RegisterPage extends Component {
 
   onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      this.setState({image: URL.createObjectURL(event.target.files[0])});
+      this.setState({ image: URL.createObjectURL(event.target.files[0]) });
     }
-   }
+  };
 
   handleRegister = () => {
     const { username, email, password, image } = this.state;
-    console.log(username, email, password, " --- data");
-    this.setState({
-      username: "",
-      email: "",
-      password: "",
-      image: "",
-    });
 
-    this.props.register({ username, email, password, image });
+    const validationErrors = {};
+    if (!email.trim() && !this.validateEmail(email)) {
+      validationErrors.email = "Please enter a valid email.";
+    }
+    if (!password.trim() && !this.validatePassword(password)) {
+      validationErrors.password =
+        "Password must contain letters, numbers and bet at least 6 characters long.";
+    }
+    if (username.trim().length < 3) {
+      validationErrors.username = "Username is required.";
+    }
+    if (Object.keys(validationErrors).length === 0) {
+      this.props.register({ username, email, password, image });
+
+      this.setState({
+        username: "",
+        email: "",
+        password: "",
+        image: "",
+        validationErrors: {},
+      });
+    } else {
+      this.setState({ validationErrors });
+    }
   };
 
   render() {
-    const { username, email, password, image } = this.state;
+    const { username, email, password, image, validationErrors } = this.state;
 
     return (
       <div className="container">
@@ -61,8 +85,16 @@ class RegisterPage extends Component {
           />
           <label id="file-input-label" htmlFor="file-input">
             <div className="figure">
-              <img className="file-upload" alt="userPhoto" src={ image ? image : require('../../img/guest.jpg')}></img>
-              <img className="file-upload image-hover" alt="addPhoto" src={require('../../img/add-photo.png')}></img>
+              <img
+                className="file-upload"
+                alt="userPhoto"
+                src={image ? image : require("../../img/guest.jpg")}
+              ></img>
+              <img
+                className="file-upload image-hover"
+                alt="addPhoto"
+                src={require("../../img/add-photo.png")}
+              ></img>
             </div>
             <span>Upload your profile photo</span>
           </label>
@@ -87,6 +119,15 @@ class RegisterPage extends Component {
             onChange={this.handleChange}
           />
         </div>
+
+        {Object.keys(validationErrors).length ? (
+          <div className="error-alert">
+            <span>{validationErrors.email}</span>
+            <span>{validationErrors.password}</span>
+            <span>{validationErrors.username}</span>
+          </div>
+        ) : null}
+
         <button onClick={this.handleRegister}>Register</button>
       </div>
     );
