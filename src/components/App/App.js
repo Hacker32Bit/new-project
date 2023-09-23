@@ -1,43 +1,39 @@
-import { Component } from "react";
+import { useState } from "react";
 import RegisterPage from "../RegisterPage";
 import UserPage from "../UserPage";
 import NumberInput from "../NumberInput/NumberInput";
 import FNumberInput from "../NumberInput/FNumberInput";
 
-
 import "./app.css";
 
-class App extends Component {
-  state = {
-    logged: false,
-    data: { username: "", email: "", password: "", photo: "" },
+function App() {
+  const [logged, setLogged] = useState(false);
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    photo: "",
+  });
+
+  const register = (data) => {
+    setLogged(true);
+    setData(data);
   };
 
-  register = (data) => {
-    this.setState({
-      logged: true,
-      data: data,
-    })
+  const onLogout = () => {
+    setLogged(false);
   };
 
-  onLogout = () => {
-    this.setState({
-      logged: false
-    })
-  }
-
-  render() {
-    return (
-      <div className="app">
-        {/* {this.state.logged ? (
-          <UserPage userData={this.state.data} onLogout={this.onLogout}/>
-        ) : (
-          <RegisterPage register={this.register} />
-        )} */}
-        <FNumberInput />
-      </div>
-    );
-  }
+  return (
+    <div className="app">
+      {logged ? (
+        <UserPage userData={data} onLogout={onLogout} />
+      ) : (
+        <RegisterPage register={register} />
+      )}
+      {/* <FNumberInput /> */}
+    </div>
+  );
 }
 
 export default App;
