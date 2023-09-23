@@ -1,4 +1,5 @@
 import { useState } from "react";
+import LocalStorageService from "../../services/LocalStorageService";
 import RegisterPage from "../RegisterPage";
 import UserPage from "../UserPage";
 import NumberInput from "../NumberInput/NumberInput";
@@ -7,15 +8,13 @@ import FNumberInput from "../NumberInput/FNumberInput";
 import "./app.css";
 
 function App() {
-  const [logged, setLogged] = useState(false);
-  const [data, setData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    photo: "",
-  });
+  const storedData = LocalStorageService.getUserData()
+  const [logged, setLogged] = useState(!!storedData);
+  const [data, setData] = useState(storedData);
 
   const register = (data) => {
+    LocalStorageService.saveUserData(data)
+
     setLogged(true);
     setData(data);
   };
