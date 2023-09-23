@@ -1,7 +1,8 @@
 import { Component } from "react";
 import RegisterPage from "../RegisterPage";
 import UserPage from "../UserPage";
-import NumberInput from "../NumberInput";
+import NumberInput from "../NumberInput/NumberInput";
+import FNumberInput from "../NumberInput/FNumberInput";
 
 
 import "./app.css";
@@ -33,7 +34,7 @@ class App extends Component {
         ) : (
           <RegisterPage register={this.register} />
         )} */}
-        <NumberInput />
+        <FNumberInput />
       </div>
     );
   }
