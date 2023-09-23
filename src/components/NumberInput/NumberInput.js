@@ -4,46 +4,45 @@ import "./number-input.css";
 
 class RegisterPage extends Component {
   state = {
-    number: 0,
+    value: 0,
+    error: false
   };
 
-  handleChange = (event) => {
-    this.setState({
-      number: event.target.value,
-    });
+  changeValue = (value) => {
+    this.setState({ value, error: false });
   };
 
-  onButton = (event) => {
-    switch (event.target.className){
-        case "reduce-btn":
-            this.setState({
-                number: +this.state.number - 1
-            });
-            break;
-        case "add-btn":
-            this.setState({
-                number: +this.state.number + 1
-            });
-            break;
-        default:
-            break
+  onMinus = () => this.changeValue(this.state.value - 1)
+  onPlus = () => this.changeValue(this.state.value + 1)
+
+  onInputChange = (event) => {
+    const value = Number(event.target.value.trim())
+
+    if(isNaN(value)) {
+    return this.setState({error: true})
     }
+
+    this.setState({value, error: false})
   }
 
   render() {
+    const { value, error } = this.state
+
     return (
       <div className="container">
         <h1>Input number</h1>
         <div className="input">
-          <button onClick={this.onButton} className="reduce-btn">-</button>
+          <button onClick={this.onMinus} className="reduce-btn">-</button>
           <input
             type="text"
             name="number"
             id="username"
-            value={this.state.number}
-            onChange={this.handleChange}
+            value={value}
+            onChange={this.onInputChange}
           />
-          <button onClick={this.onButton} className="add-btn">+</button>
+          <button onClick={this.onPlus} className="add-btn">+</button>
+
+          { error ? <div>Input only number</div> : null}
         </div>
       </div>
     );
