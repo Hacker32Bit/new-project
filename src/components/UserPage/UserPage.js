@@ -1,22 +1,20 @@
-import { Component } from "react";
-
 import "./user-page.css";
 
-class UserPage extends Component {
+function UserPage(props) {
+  const { username, email, image } = props.userData;
 
-  render() {
-
-    const { username, email, image } = this.props.userData
-
-    return (
-      <div className="container">
-        <h1>Welcome back, {username}!</h1>
-        <img className="profile-photo" alt="profile" src={image ? image : require("../../img/guest-photo.png")}></img>
-        <h3>Your email: {email}</h3>
-        <button onClick={this.props.onLogout}>LogOut</button>
-      </div>
-    );
-  }
+  return (
+    <div className="container">
+      <h1>Welcome back, {username}!</h1>
+      <img
+        className="profile-photo"
+        alt="profile"
+        src={image ? image : require("../../img/guest-photo.png")}
+      ></img>
+      <h3>Your email: {email}</h3>
+      <button onClick={props.onLogout}>LogOut</button>
+    </div>
+  );
 }
 
 export default UserPage;
