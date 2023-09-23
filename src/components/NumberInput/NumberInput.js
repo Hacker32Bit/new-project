@@ -2,7 +2,7 @@ import { Component } from "react";
 
 import "./number-input.css";
 
-class RegisterPage extends Component {
+class NumberInput extends Component {
   state = {
     value: 0,
     error: false
@@ -49,4 +49,4 @@ class RegisterPage extends Component {
   }
 }
 
-export default RegisterPage;
+export default NumberInput;
