@@ -26,10 +26,8 @@ class RegisterPage extends Component {
 
   onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      this.setState({ image: URL.createObjectURL(event.target.files[0]) });
+      this.setState({ image: URL.createObjectURL(event.target.files[0])});
     }
-
-    //localStorage.setItem("image", URL.createObjectURL(event.target.files[0]));
   };
 
   handleRegister = () => {
@@ -94,7 +92,7 @@ class RegisterPage extends Component {
               <img
                 className="file-upload"
                 alt="userPhoto"
-                src={localStorage.getItem("image") ? image : require("../../img/guest.jpg")}
+                src={image ? image : require("../../img/guest.jpg")}
               ></img>
               <img
                 className="file-upload image-hover"
