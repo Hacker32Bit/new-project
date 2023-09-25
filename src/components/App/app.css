@@ -1,0 +1,19 @@
+.app button {
+    background-color: #4cd137;
+    border: 0px;
+    padding: 10px;
+    color: #f5f6fa;
+    font-size: 20px;
+    font-weight: 800;
+    width: 200px;
+    border-radius: 10px;
+    transition: width 0.2s;
+    margin: 20px;
+}
+
+.app button:hover {
+    background-color: #44bd32;
+    width: 220px;
+    cursor: pointer;
+    transition: width 0.2s;
+}

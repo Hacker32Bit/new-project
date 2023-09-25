@@ -11,6 +11,7 @@ function App() {
   const storedData = LocalStorageService.getUserData()
   const [logged, setLogged] = useState(!!storedData);
   const [data, setData] = useState(storedData);
+  const [isDarkTheme, setDarkTheme] = useState(false)
 
   const register = (data) => {
     LocalStorageService.saveUserData(data)
@@ -23,12 +24,24 @@ function App() {
     setLogged(false);
   };
 
+  const onTheme = () => {
+    setDarkTheme(!isDarkTheme)
+  }
+
+  const style = {}
+
+  if (isDarkTheme){
+    style.backgroundColor = "#f5f6fa"
+    style.color = "black"
+  }
+
   return (
-    <div className="app">
+    <div className="app" style={style}>
+      <button onClick={onTheme}>Change theme</button>
       {logged ? (
-        <UserPage userData={data} onLogout={onLogout} />
+        <UserPage userData={data} onLogout={onLogout} theme={isDarkTheme}/>
       ) : (
-        <RegisterPage register={register} />
+        <RegisterPage register={register} theme={isDarkTheme}/>
       )}
       {/* <FNumberInput /> */}
     </div>
