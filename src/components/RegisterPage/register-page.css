@@ -11,6 +11,11 @@
     color: #f5f6fa;
 }
 
+.light-theme .container {
+    background-color: #dcdde1;
+    color: black;
+}
+
 .container h1 {
     text-transform: uppercase;
 }
@@ -24,6 +29,11 @@
     margin: 15px 0;
     border: 0px;
     border-radius: 7px;
+}
+
+.light-theme .container input {
+    background-color: #f5f6fa;
+    color: black;
 }
 
 .container input::placeholder {

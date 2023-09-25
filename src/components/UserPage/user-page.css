@@ -11,6 +11,12 @@
     color: #f5f6fa;
 }
 
+.light-theme .container {
+    background-color: #dcdde1;
+    color: black;
+}
+
+
 .container h1 {
     text-transform: uppercase;
 }
@@ -39,4 +45,8 @@
     width: 200px;
     border-radius: 100px;
     outline: 5px solid #273c75;
+}
+
+.light-theme .profile-photo {
+    outline: 5px solid #f5f6fa;
 }

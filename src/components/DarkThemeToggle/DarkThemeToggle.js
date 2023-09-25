@@ -1,21 +1,22 @@
 import { useState } from "react";
+import "./theme.css"
 
-export default function DarkThemeToggle() {
-    const [isEnabled, setIsEnabled] = useState(false)
+export default function DarkThemeToggle({ children }) {
+    const [isEnabled, setIsEnabled] = useState(true)
 
     const onChangeThemeColor = () => {
-        document.body.style.backgroundColor = isEnabled ? "black" : "white"
-        document.body.style.color = isEnabled ? "white" : "black"
-    
-        setIsEnabled(!isEnabled)
+        setIsEnabled((prev) => !prev)
     }
 
+    console.log(children)
+
     return (
-        <div>
+        <div className={isEnabled ? "dark-theme app" : "light-theme app"}>
             <label>
                 Change theme
                 <input type="checkbox" checked={isEnabled} onChange={onChangeThemeColor}></input>
             </label>
+            {children}
         </div>
     )
 }

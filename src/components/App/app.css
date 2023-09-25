@@ -17,3 +17,16 @@
     cursor: pointer;
     transition: width 0.2s;
 }
+
+.test-c {
+    display: block;
+    width: 500px;
+    background-color: purple;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 5px 4px 15px 2px #A62DD0;
+    margin: 20px;
+    padding: 20px;
+}
