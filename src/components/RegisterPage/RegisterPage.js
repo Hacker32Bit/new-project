@@ -1,44 +1,54 @@
-import { Component } from "react";
+import { useState } from "react";
 
 import "./register-page.css";
 
-class RegisterPage extends Component {
-  state = {
-    username: "",
-    email: "",
-    password: "",
-    image: null,
-    validationErrors: {},
+function RegisterPage(props) {
+  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [password, setPassword] = useState(localStorage.getItem("password"));
+  const [image, setImage] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({});
+
+  const validateEmail = (email) => {
+    return true;
   };
 
-  validateEmail = (email) => {
-    return false;
-  };
-  validatePassword = (password) => {
-    return false;
+  const validatePassword = (password) => {
+    return true;
   };
 
-  handleChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     localStorage.setItem(name, value);
-    this.setState({ [name]: localStorage.getItem(name) });
-  };
 
-  onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      this.setState({ image: URL.createObjectURL(event.target.files[0])});
+    switch (name) {
+      case "username":
+        setUsername(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      default:
+        break;
     }
   };
 
-  handleRegister = () => {
-    const { username, email, password, image } = this.state;
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
+    }
+  };
 
+  const handleRegister = () => {
     const validationErrors = {};
-    if (!email.trim() && !this.validateEmail(email)) {
+    if (!email.trim() && validateEmail(email)) {
       validationErrors.email = "Please enter a valid email.";
     }
 
-    if (!password.trim() && !this.validatePassword(password)) {
+    if (!password.trim() && validatePassword(password)) {
       validationErrors.password =
         "Password must contain letters, numbers and bet at least 6 characters long.";
     }
@@ -48,94 +58,87 @@ class RegisterPage extends Component {
     }
 
     if (Object.keys(validationErrors).length === 0) {
-      this.props.register({ username, email, password, image });
-
-      this.setState({
-        username: "",
-        email: "",
-        password: "",
-        image: null,
-        validationErrors: {},
-      });
+      props.register({ username, email, password, image });
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setImage(null);
+      setValidationErrors({});
     } else {
-      this.setState({ validationErrors });
+      setValidationErrors(validationErrors);
     }
   };
 
-  render() {
-    const { image, validationErrors } = this.state;
-    console.log(localStorage.getItem("image"))
-    return (
-      <div className="container">
-        <h1>Register now!</h1>
-        <div className="register-input">
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            id="username"
-            value={localStorage.getItem("username")}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="register-input">
-          <input
-            type="file"
-            name="file"
-            id="file-input"
-            className="photoInput"
-            onChange={this.onImageChange}
-            accept="image/*"
-          />
-          <label id="file-input-label" htmlFor="file-input">
-            <div className="figure">
-              <img
-                className="file-upload"
-                alt="userPhoto"
-                src={image ? image : require("../../img/guest.jpg")}
-              ></img>
-              <img
-                className="file-upload image-hover"
-                alt="addPhoto"
-                src={require("../../img/add-photo.png")}
-              ></img>
-            </div>
-            <span>Upload your profile photo</span>
-          </label>
-        </div>
-        <div className="register-input">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            id="email"
-            value={localStorage.getItem("email")}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="register-input">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            id="password"
-            value={localStorage.getItem("password")}
-            onChange={this.handleChange}
-          />
-        </div>
-
-        {Object.keys(validationErrors).length ? (
-          <div className="error-alert">
-            <span>{validationErrors.email}</span>
-            <span>{validationErrors.password}</span>
-            <span>{validationErrors.username}</span>
-          </div>
-        ) : null}
-
-        <button onClick={this.handleRegister}>Register</button>
+  return (
+    <div className="container">
+      <h1>Register now!</h1>
+      <div className="register-input">
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          id="username"
+          value={localStorage.getItem("username")}
+          onChange={handleChange}
+        />
       </div>
-    );
-  }
+      <div className="register-input">
+        <input
+          type="file"
+          name="file"
+          id="file-input"
+          className="photoInput"
+          onChange={onImageChange}
+          accept="image/*"
+        />
+        <label id="file-input-label" htmlFor="file-input">
+          <div className="figure">
+            <img
+              className="file-upload"
+              alt="userPhoto"
+              src={image ? image : require("../../img/guest.jpg")}
+            ></img>
+            <img
+              className="file-upload image-hover"
+              alt="addPhoto"
+              src={require("../../img/add-photo.png")}
+            ></img>
+          </div>
+          <span>Upload your profile photo</span>
+        </label>
+      </div>
+      <div className="register-input">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          id="email"
+          value={localStorage.getItem("email")}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="register-input">
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          id="password"
+          value={localStorage.getItem("password")}
+          onChange={handleChange}
+        />
+      </div>
+
+      {Object.keys(validationErrors).length ? (
+        <div className="error-alert">
+          <span>{validationErrors.email}</span>
+          <span>{validationErrors.password}</span>
+          <span>{validationErrors.username}</span>
+        </div>
+      ) : null}
+
+      <button onClick={handleRegister}>Register</button>
+    </div>
+  );
 }
 
 export default RegisterPage;
