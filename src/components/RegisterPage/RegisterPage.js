@@ -69,13 +69,6 @@ function RegisterPage(props) {
     }
   };
 
-  const style = {}
-
-  if (props.theme){
-    style.backgroundColor = "#dcdde1"
-    style.color = "black"
-  }
-
   return (
     <div className="container">
       <h1>Register now!</h1>

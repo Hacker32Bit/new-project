@@ -4,15 +4,8 @@ function UserPage(props) {
 
   const { username, email, image } = props.userData;
 
-  const style = {}
-
-  if (props.theme){
-    style.backgroundColor = "#dcdde1"
-    style.color = "black"
-  }
-
   return (
-    <div className="container" style={style}>
+    <div className="container">
       <h1>Welcome back, {username}!</h1>
       <img
         className="profile-photo"
