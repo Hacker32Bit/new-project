@@ -5,24 +5,22 @@ import NewCard from "../NewCard";
 function App() {
   const newsList = [
     {
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80",
+      id: 1,
+      img: "/images/image1.avif",
       title: "News title 1",
       text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
     },
     {
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80",
+      id: 2,
+      img: "/images/image2.jpg",
       title: "News title 2",
       text: "text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
     },
     {
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80",
+      id: 3,
+      img: "/images/image3.webp",
       title: "News title 3",
       text: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80",
-      title: "News title 4",
-      text: "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop",
     },
   ];
 
@@ -41,7 +39,7 @@ function App() {
         <Row>
           {newsList.map((item) => {
             return (
-              <Col lg={3} md={4} sm={6} xs={12}>
+              <Col lg={3} md={4} sm={6} xs={12} key={item.id}>
                 <NewCard
                   img={item.img}
                   title={item.title}

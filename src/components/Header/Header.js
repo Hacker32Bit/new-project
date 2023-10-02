@@ -1,13 +1,5 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Container, Nav, Navbar, Form, Button, NavDropdown, ButtonGroup, ButtonToolbar, Row, Col} from "react-bootstrap"
+import logo from "./logo.png"
 
 function Header() {
   return (
@@ -19,7 +11,9 @@ function Header() {
         data-bs-theme="dark"
       >
         <Container>
-          <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+          <Navbar.Brand href="#">
+            <img src={logo} alt="BrandLogo" style={{width: "30px"}}></img>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
