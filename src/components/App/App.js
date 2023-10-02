@@ -1,4 +1,4 @@
-import { Container, Col, Row, Card, Button, Table } from "react-bootstrap";
+import { Container, Col, Row, Table } from "react-bootstrap";
 import Header from "../Header";
 import NewCard from "../NewCard";
 
@@ -104,7 +104,13 @@ function App() {
           </Table>
         </Row>
       </Container>
-      {/* <Main /> */}
+      
+      <Container fluid className="bg-dark text-white p-3 text-center">
+        <Container>
+          &copy; 2023 News portal. All rights Reserved.
+        </Container>
+      </Container>
+
     </>
   );
 }
