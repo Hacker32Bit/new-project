@@ -1,6 +1,7 @@
 import { Container, Col, Row, Table } from "react-bootstrap";
 import Header from "../Header";
 import NewCard from "../NewCard";
+import UserCard from "../UserCard";
 
 function App() {
   const newsList = [
@@ -24,6 +25,15 @@ function App() {
     },
   ];
 
+  const userData = {
+    name: "Gektor",
+    surname: "Gevorgyan",
+    photo: "/images/userphoto.jpg",
+    specialization: "Software Developer",
+    about:
+      "My current stack of technologies is: C++, Python, Java, C#, Web Developing (HTML, CSS, PHP, JS)",
+  };
+
   return (
     <>
       <Header />
@@ -37,6 +47,9 @@ function App() {
       </Container>
       <Container>
         <Row>
+          <Col lg={3} md={4} sm={6} xs={12}>
+            <UserCard userData={userData} />
+          </Col>
           {newsList.map((item) => {
             return (
               <Col lg={3} md={4} sm={6} xs={12} key={item.id}>
@@ -104,13 +117,10 @@ function App() {
           </Table>
         </Row>
       </Container>
-      
-      <Container fluid className="bg-dark text-white p-3 text-center">
-        <Container>
-          &copy; 2023 News portal. All rights Reserved.
-        </Container>
-      </Container>
 
+      <Container fluid className="bg-dark text-white p-3 text-center">
+        <Container>&copy; 2023 News portal. All rights Reserved.</Container>
+      </Container>
     </>
   );
 }
